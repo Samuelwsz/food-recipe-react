@@ -1,7 +1,8 @@
 import { useContext, useEffect } from "react"
 import { useParams } from "react-router-dom"
-import { GlobalContext } from "../../context/context"
-import { ContextProps } from "../../interfaces/interfaces"
+import { GlobalContext } from "@/context/context"
+import { ContextProps } from "@/interfaces/interfaces"
+import { Button } from "@/components/ui/button"
 
 export function Details() {
   const { id } = useParams()
@@ -47,16 +48,16 @@ export function Details() {
         <span className="text-sm text-cyan-500 font-medium">
           {recipeDetailsData?.recipe?.publisher}
         </span>
-        <h3 className="font-bold text-2xl truncate text-white">
+        <h3 className="font-bold text-2xl truncate ">
           {recipeDetailsData?.recipe?.title}
         </h3>
         <div>
-          <button
+          <Button
             onClick={() =>
               recipeDetailsData?.recipe &&
               handleAddToFavorite(recipeDetailsData?.recipe)
             }
-            className="p-3 px-8 rounded-lg text-sm uppercase font-medium tracking-wider mt-3 inline-block shadow-md bg-black text-white"
+            className="p-3 px-8 rounded-lg text-sm uppercase font-medium tracking-wider mt-3 inline-block shadow-md"
           >
             {favoriteList &&
             favoriteList.length > 0 &&
@@ -65,19 +66,17 @@ export function Details() {
             ) !== -1
               ? "Remove from favorites"
               : "Add to favorites"}
-          </button>
+          </Button>
         </div>
         <div>
-          <span className="text-2xl font-semibold text-gray-300">
-            Ingredients:
-          </span>
+          <span className="text-2xl font-semibold">Ingredients:</span>
           <ul className="flex flex-col gap-3">
             {recipeDetailsData?.recipe?.ingredients.map((ingredient, index) => (
               <li key={index}>
-                <span className="text-2xl font-semibold text-gray-300">
+                <span className="text-2xl font-semibold">
                   {ingredient.quantity} {ingredient.unit}
                 </span>
-                <span className="text-2xl font-semibold text-gray-300">
+                <span className="text-2xl font-semibold">
                   {ingredient.description}
                 </span>
               </li>

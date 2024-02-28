@@ -1,18 +1,25 @@
 import { Outlet } from "react-router-dom"
 import { NavBar } from "./components/NavBar"
 import GlobalState from "./context/context"
+import { ThemeProvider } from "./components/theme-provider"
+import { ModeToggle } from "./components/mode-toggle"
 
 function App() {
   return (
     <>
-      <GlobalState>
-        <div>
-          <div className="min-h-screen p-6 bg-slate-800 text-white text-lg">
-            <NavBar />
-            <Outlet />
+      <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+        <GlobalState>
+          <div>
+            <div className="flex justify-center pt-5">
+              <ModeToggle />
+            </div>
+            <div className="min-h-screen p-6 text-lg">
+              <NavBar />
+              <Outlet />
+            </div>
           </div>
-        </div>
-      </GlobalState>
+        </GlobalState>
+      </ThemeProvider>
     </>
   )
 }

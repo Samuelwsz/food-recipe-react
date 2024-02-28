@@ -2,6 +2,7 @@ import { useContext } from "react"
 import { NavLink } from "react-router-dom"
 import { GlobalContext } from "../context/context"
 import { ContextProps } from "../interfaces/interfaces"
+import { Input } from "./ui/input"
 
 export function NavBar() {
   const context = useContext(GlobalContext)
@@ -14,13 +15,13 @@ export function NavBar() {
         <NavLink to="/">FoodRecipe</NavLink>
       </h2>
       <form onSubmit={handleSubmit}>
-        <input
+        <Input
           type="text"
           name="search"
           value={searchParam}
           onChange={(e) => setSearchParam(e.target.value)}
           placeholder="Enter Items..."
-          className="bg-white/75 p-3 px-8 rounded-full outline-none lg:w-96 shadow-lg shadow-slate-500 text-black"
+          className="p-3 px-8 rounded-full outline-none lg:w-96  text-black dark:text-white dark:border dark:border-slate-600"
         />
       </form>
       <ul className="flex gap-5">
