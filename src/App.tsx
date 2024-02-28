@@ -1,19 +1,18 @@
 import { Outlet } from "react-router-dom"
 import { NavBar } from "./components/NavBar"
+import GlobalState from "./context/context"
 
 function App() {
   return (
     <>
-      <div>
-        <div className="min-h-screen p-6 bg-slate-800 text-white text-lg">
-          <NavBar />
-          <Outlet />
-          {/*     <Routes>
-            <Route path="/" element={<PageHome />} />
-            <Route path="/favorites" element={<PageFavorites />} />
-          </Routes>*/}
+      <GlobalState>
+        <div>
+          <div className="min-h-screen p-6 bg-slate-800 text-white text-lg">
+            <NavBar />
+            <Outlet />
+          </div>
         </div>
-      </div>
+      </GlobalState>
     </>
   )
 }

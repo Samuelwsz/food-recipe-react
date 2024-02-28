@@ -6,6 +6,10 @@ export interface ContextProps {
   handleSubmit: (event: FormEvent<HTMLFormElement>) => Promise<void>
   loading: boolean
   recipeList: RecipeListprops[]
+  recipeDetailsData: RecipeDetailsData | null
+  setRecipeDetailsData: Dispatch<SetStateAction<RecipeDetailsData | null>>
+  favoriteList: RecipeListprops[]
+  handleAddToFavorite: (getCurrentItem: RecipeDetailsData["recipe"]) => void
 }
 
 export interface RecipeListprops {
@@ -13,4 +17,20 @@ export interface RecipeListprops {
   publisher: string
   title: string
   id: string
+}
+
+export interface RecipeDetailsData {
+  recipe: {
+    id: string
+    title: string
+    publisher: string
+    image_url: string
+    ingredients: Ingredient[]
+  }
+}
+
+interface Ingredient {
+  quantity: number
+  unit: string
+  description: string
 }
