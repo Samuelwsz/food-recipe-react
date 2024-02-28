@@ -1,4 +1,4 @@
-import { FormEvent, ReactNode, createContext, useState } from "react"
+import { FormEvent, ReactNode, createContext, useEffect, useState } from "react"
 import {
   ContextProps,
   RecipeDetailsData,
@@ -17,6 +17,19 @@ export default function GlobalState({ children }: { children: ReactNode }) {
   const [favoriteList, setFavoriteList] = useState<RecipeListprops[]>([])
 
   const navigate = useNavigate()
+
+  // Função para salvar e carregar os favoritos do localStorage
+  const updateFavoritesFromLocalStorage = () => {
+    const favoritesFromStorage = localStorage.getItem("favorites")
+    if (favoritesFromStorage) {
+      setFavoriteList(JSON.parse(favoritesFromStorage))
+    }
+  }
+
+  // Carregar os favoritos do localStorage na inicialização da aplicação
+  useEffect(() => {
+    updateFavoritesFromLocalStorage()
+  }, [])
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -55,6 +68,8 @@ export default function GlobalState({ children }: { children: ReactNode }) {
     }
 
     setFavoriteList(cpyFavoriteList)
+    // Salvar os favoritos no localStorage após atualizar o estado
+    localStorage.setItem("favorites", JSON.stringify(cpyFavoriteList))
   }
 
   return (
